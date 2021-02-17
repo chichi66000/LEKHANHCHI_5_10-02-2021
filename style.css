@@ -41,7 +41,7 @@ border:none;
 }
 /* style pour panier*/
 .choix_en_plus{
-    height: 13rem;
+    height: 14rem;
 }
 
 /* style pour page paiement */
@@ -63,7 +63,7 @@ border:none;
     }
 }
 
-@media screen and (max-width:575px) {
+@media screen and (min-width: 401px) and (max-width:575px) {
     
     .social {
         font-size: 1rem;
@@ -73,7 +73,7 @@ border:none;
        margin:auto;
    }
    .produit{
-    height: 15rem
+    height: 16rem
 }
 
   
@@ -87,6 +87,9 @@ border:none;
     margin:auto;
     }
     .produit{
-        height: 12rem
+        height: 16rem
+    }
+    .choix_en_plus{
+        height: 10rem;
     }
 }
