@@ -29,7 +29,7 @@ let td2 = document.createElement('td');
 
 let montant = document.createElement('td'); // recuperer le montant total du commande
     montant.setAttribute('class', 'text-right');
-    montant.innerHTML = TOTAL;
+    montant.innerHTML = TOTAL/100 + ',00€';
     tr2.append(montant);
 
 let tr3 = document.createElement('tr');// récuperer le mode de paiement
@@ -84,11 +84,11 @@ if (productInCart && info_product ) {
             
             
             let prix = document.createElement('td');
-                prix.innerHTML= item.price;
+                prix.innerHTML= parseInt(item.price)/100 +',00€';
 
             let total = document.createElement('td');
                 total.setAttribute('class','text-right');
-                total.innerHTML= item.price * item.inCart;
+                total.innerHTML= item.price * item.inCart/100 +',00€';
              
             tr4.append(photo);
             tr4.append(quantity);
@@ -110,7 +110,7 @@ let tr5 = document.createElement('tr');
     let livraison1 = document.createElement('td');
         livraison1.setAttribute('colspan', '3');
         livraison1.setAttribute('class', 'text-right');
-        livraison1.innerHTML = fraisLivraison ;
+        livraison1.innerHTML = fraisLivraison/100 +',00€' ;
         tr5.append(livraison1);
 
 let tr6 = document.createElement('tr');
@@ -124,7 +124,7 @@ let tr6 = document.createElement('tr');
     let soustotal1 = document.createElement('td');
         soustotal1.setAttribute('colspan', '3');
         soustotal1.setAttribute('class', 'text-right');
-        soustotal1.innerHTML = TOTAL;
+        soustotal1.innerHTML = TOTAL/100 +',00€';
         tr6.append(soustotal1);
 info_TOTAL.append(tr5)
 info_TOTAL.append(tr6)
