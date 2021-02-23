@@ -31,7 +31,7 @@
                          td3.setAttribute('class','col-1')
                     
                     let i1 = document.createElement('i');
-                        i1.addEventListener('click',() => addition(item));
+                        i1.addEventListener('click',() => addition(item));// ajouter fonction addition
                         i1.setAttribute('class','fas fa-plus-circle addition');
                     td3.append(i1);
 
@@ -42,19 +42,20 @@
                     td3.append(span);
 
                     let i2 = document.createElement('i');
-                        i2.addEventListener('click',() => soustraction(item));
+                        i2.addEventListener('click',() => soustraction(item));//ajouter fonction soustraction
                         i2.setAttribute('class','fas fa-minus-circle soustraction');
                     td3.append(i2);
 
                     let td4 = document.createElement('td');
                         td4.setAttribute('class','col-1');
-                        td4.innerHTML= item.price;
+                        let prix = parseInt(item.price)/100;
+                        td4.innerHTML= prix + ',00 €';
 
                     let td5 = document.createElement('td');
                         td5.setAttribute('class','col-1')
                         td5.setAttribute('class','somme')
 
-                        td5.innerHTML= item.price * item.inCart ;
+                        td5.innerHTML= item.price * item.inCart/100 +',00€' ;
 
                     tr.append(td1)
                     tr.append(td2)
@@ -65,7 +66,7 @@
 
                     // on ajoute la somme total dans le localStorage
 
-                    productTotal.innerHTML = cartCost;
+                    productTotal.innerHTML = cartCost/100 +',00€';
 
                 })
             }
@@ -80,7 +81,7 @@ function updatePanier () {
     let totalCost = parseInt(localStorage.getItem('totalCost'));
     let cartNumber = parseInt(localStorage.getItem('cartNumber'));
     let totalProduit= document.querySelector('.totalProduit'); 
-    totalProduit.innerHTML = totalCost;// afficher le total des produits quand la page se rafraichir;  
+    totalProduit.innerHTML = totalCost/100 +',00€';// afficher le total des produits quand la page se rafraichir;  
     document.getElementById('in-cart-items-num').innerHTML = cartNumber;
 }
 
@@ -116,13 +117,13 @@ function addition (item) { // ajouter 1 quand on click sur + et mise à jour loc
         localStorage.setItem('TOTAL', JSON.stringify(sum));
 
         quantity[i].innerHTML = tab[i].inCart; // afficher le résultat dans HTML
-        somme[i].innerHTML = tab[i].total;
-        sousTotal.innerHTML = sum;
-        totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
+        somme[i].innerHTML = tab[i].total/100 + ',00€';
+        sousTotal.innerHTML = sum/100 +',00 €';
+        totalProduit.innerHTML = parseInt(localStorage.getItem('totalCost'))/100 +',00€';
         if(inputChrono.checked==false && inputColis.checked== false) {
-            prixApayer.innerHTML= JSON.parse(localStorage.getItem('TOTAL'));
+            prixApayer.innerHTML= parseInt(localStorage.getItem('TOTAL'))/100 +',00€';
         }
-        if(inputChrono.checked || inputColis.checked ) { prixApayer.innerHTML= parseInt(localStorage.getItem('TOTAL')) + parseInt(localStorage.getItem('livraison'));}
+        if(inputChrono.checked || inputColis.checked ) { prixApayer.innerHTML=( parseInt(localStorage.getItem('TOTAL')) + parseInt(localStorage.getItem('livraison')))/100 +',00€';}
         
     } 
 }
@@ -158,14 +159,14 @@ function soustraction (item) {//enlever 1 quand on click sur - et mise à jour l
         localStorage.setItem('TOTAL', JSON.stringify(sum));
 
         quantity[i].innerHTML = tab[i].inCart;
-        somme[i].innerHTML = tab[i].total;
+        somme[i].innerHTML = tab[i].total/100 +',00€';
         panier.innerHTML = panierTotal;
-        sousTotal.innerHTML = sum;
-        totalProduit.innerHTML = JSON.parse(localStorage.getItem('totalCost'));
+        sousTotal.innerHTML = sum/100 +',00€';
+        totalProduit.innerHTML = parseInt(localStorage.getItem('totalCost'))/100 +',00€';
         if(inputChrono.checked==false && inputColis.checked== false) {
-            prixApayer.innerHTML= JSON.parse(localStorage.getItem('TOTAL'));
+            prixApayer.innerHTML= parseInt(localStorage.getItem('TOTAL'))/100 +',00€';
         }
-        if(inputChrono.checked || inputColis.checked ) { prixApayer.innerHTML= parseInt(localStorage.getItem('TOTAL')) + parseInt(localStorage.getItem('livraison'));}
+        if(inputChrono.checked || inputColis.checked ) { prixApayer.innerHTML= (parseInt(localStorage.getItem('TOTAL')) + parseInt(localStorage.getItem('livraison')))/100 +',00€';}
     }
 }
 
@@ -185,22 +186,22 @@ inputChrono.addEventListener('change', ()=> { // quand le Chronopost est choisi,
      
     if( inputChrono.checked==false) {prixChrono.innerHTML = ""; }
     else if( inputChrono.checked && allArticle<=3) {
-        prixChrono.innerHTML = 29 ;
+        prixChrono.innerHTML = 500/100 + ',00€';
         prixColis.innerHTML="";
-        totalLivraison.innerHTML = 29;
-        localStorage.setItem('livraison', 29);
+        totalLivraison.innerHTML = 500/100 + ',00€';
+        localStorage.setItem('livraison', 500);
     } 
     else if( inputChrono.checked && allArticle>3 && allArticle<=6) {
-            prixChrono.innerHTML = 33 ;
+            prixChrono.innerHTML = 600/100 + ',00€';
             prixColis.innerHTML="";
-            totalLivraison.innerHTML = 33;
-            localStorage.setItem('livraison', 33);
+            totalLivraison.innerHTML = 600/100 + ',00€';
+            localStorage.setItem('livraison', 600);
     }
 
-    else {  prixChrono.innerHTML = 39;
+    else {  prixChrono.innerHTML = 900/100 +',00€';
             prixColis.innerHTML="";
-            totalLivraison.innerHTML = 39;
-            localStorage.setItem('livraison', 39);
+            totalLivraison.innerHTML = 900/100 +',00€';
+            localStorage.setItem('livraison', 900);
     }
     prixTOTAL();
 })
@@ -210,23 +211,23 @@ inputColis.addEventListener('change', ()=> { // quand le Cplissimo est choisi, o
 
     if( inputColis.checked==false) {prixColis.innerHTML = ""; }
     else if( inputColis.checked && allArticle<=3) {
-            prixColis.innerHTML = 7 ;
+            prixColis.innerHTML = 300/100 +',00€';
             prixChrono.innerHTML ="";
-            totalLivraison.innerHTML = 7;
-            localStorage.setItem('livraison', 7);
+            totalLivraison.innerHTML = 300/100 +',00€';
+            localStorage.setItem('livraison', 300);
 
     } 
     else if( inputColis.checked && allArticle>3 && allArticle<=6) {
-            prixColis.innerHTML = 9 ;
+            prixColis.innerHTML = 500/100 +',00€';
             prixChrono.innerHTML ="";
-            totalLivraison.innerHTML = 9;
-            localStorage.setItem('livraison', 9);
+            totalLivraison.innerHTML = 500/100 +',00€';
+            localStorage.setItem('livraison', 500);
 
     }
-    else {  prixColis.innerHTML = 15;
+    else {  prixColis.innerHTML = 700/100 +',00€';
             prixChrono.innerHTML ="";
-            totalLivraison.innerHTML = 15;
-            localStorage.setItem('livraison', 15);
+            totalLivraison.innerHTML = 700/100 +',00€';
+            localStorage.setItem('livraison', 700);
     }
     prixTOTAL();
 })
@@ -237,7 +238,7 @@ function prixTOTAL() {//calculer le prix à payer: produit + livraison
     let TOTAL = livraison + totalCost;
     localStorage.setItem('TOTAL', JSON.stringify(TOTAL));
     let prixApayer = document.querySelector('.prixApayer');
-    prixApayer.innerHTML = JSON.parse(localStorage.getItem('TOTAL'));
+    prixApayer.innerHTML = parseInt(localStorage.getItem('TOTAL'))/100 + ',00€';
 }
 
 
